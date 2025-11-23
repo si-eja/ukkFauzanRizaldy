@@ -18,7 +18,7 @@ namespace ukkFauzanRizaldy
 
                 string query =
                     @"SELECT id_produk, nama_produk, harga, stok, deskripsi, gambar_produk, tanggal
-                  FROM dbo.products";
+                  FROM dbo.produk";
 
                 if (!string.IsNullOrEmpty(keyword))
                 {
@@ -47,7 +47,7 @@ namespace ukkFauzanRizaldy
                 conn.Open();
 
                 string query =
-                    @"SELECT * FROM dbo.products WHERE id_produk=@id";
+                    @"SELECT * FROM dbo.produk WHERE id_produk=@id";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@id", id);

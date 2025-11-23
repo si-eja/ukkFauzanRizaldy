@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.dataGridViewProduk = new System.Windows.Forms.DataGridView();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pbGambar = new System.Windows.Forms.PictureBox();
             this.tbCari = new System.Windows.Forms.TextBox();
             this.tbNamaProduk = new System.Windows.Forms.TextBox();
             this.tbHarga = new System.Windows.Forms.TextBox();
@@ -50,7 +50,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.btnHapus = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProduk)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbGambar)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewProduk
@@ -60,15 +60,18 @@
             this.dataGridViewProduk.Name = "dataGridViewProduk";
             this.dataGridViewProduk.Size = new System.Drawing.Size(447, 318);
             this.dataGridViewProduk.TabIndex = 0;
+            this.dataGridViewProduk.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProduk_CellClick);
+            this.dataGridViewProduk.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProduk_CellContentClick);
             // 
-            // pictureBox1
+            // pbGambar
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(240, 160);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
+            this.pbGambar.Location = new System.Drawing.Point(12, 12);
+            this.pbGambar.Name = "pbGambar";
+            this.pbGambar.Size = new System.Drawing.Size(240, 160);
+            this.pbGambar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbGambar.TabIndex = 1;
+            this.pbGambar.TabStop = false;
+            this.pbGambar.Click += new System.EventHandler(this.pbGambar_Click);
             // 
             // tbCari
             // 
@@ -76,7 +79,7 @@
             this.tbCari.Name = "tbCari";
             this.tbCari.Size = new System.Drawing.Size(447, 20);
             this.tbCari.TabIndex = 2;
-            this.tbCari.Text = "Cari Data.....";
+            this.tbCari.TextChanged += new System.EventHandler(this.tbCari_TextChanged);
             // 
             // tbNamaProduk
             // 
@@ -140,6 +143,7 @@
             this.btnUpload.TabIndex = 7;
             this.btnUpload.Text = "Upload";
             this.btnUpload.UseVisualStyleBackColor = true;
+            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
             // 
             // label1
             // 
@@ -186,6 +190,7 @@
             this.btnTambah.TabIndex = 12;
             this.btnTambah.Text = "Tambah Produk";
             this.btnTambah.UseVisualStyleBackColor = true;
+            this.btnTambah.Click += new System.EventHandler(this.btnTambah_Click);
             // 
             // button1
             // 
@@ -195,6 +200,7 @@
             this.button1.TabIndex = 13;
             this.button1.Text = "Edit Produk";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnHapus
             // 
@@ -204,6 +210,7 @@
             this.btnHapus.TabIndex = 14;
             this.btnHapus.Text = "Hapus Produk";
             this.btnHapus.UseVisualStyleBackColor = true;
+            this.btnHapus.Click += new System.EventHandler(this.btnHapus_Click);
             // 
             // Produk
             // 
@@ -223,12 +230,12 @@
             this.Controls.Add(this.tbHarga);
             this.Controls.Add(this.tbNamaProduk);
             this.Controls.Add(this.tbCari);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pbGambar);
             this.Controls.Add(this.dataGridViewProduk);
             this.Name = "Produk";
             this.Text = "Produk";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProduk)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbGambar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -237,7 +244,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridViewProduk;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pbGambar;
         private System.Windows.Forms.TextBox tbCari;
         private System.Windows.Forms.TextBox tbNamaProduk;
         private System.Windows.Forms.TextBox tbHarga;

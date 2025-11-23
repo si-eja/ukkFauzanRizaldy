@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using Microsoft.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace ukkFauzanRizaldy
         public static bool isLoggedIn = false;
         public static string namaUser = "";
         public static string kontakUser = "";
+        public static int userId;
 
         public Form1()
         {
@@ -33,6 +35,7 @@ namespace ukkFauzanRizaldy
 
                 btnLogout.Visible = true;
                 btnLogin.Visible = false;
+                btnKelola.Visible = true;
             }
             else
             {
@@ -44,11 +47,12 @@ namespace ukkFauzanRizaldy
 
                 btnLogout.Visible = false;
                 btnLogin.Visible = true;
+                btnKelola.Visible = false;
             }
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            LoadProducts(tbCari.Text.Trim());
+            LoadProducts(textBox1.Text.Trim());
             LoadProducts();
             UpdateUI();
         }
@@ -101,6 +105,31 @@ namespace ukkFauzanRizaldy
             dataGridViewProduk.Columns["harga"].HeaderText = "Harga";
             dataGridViewProduk.Columns["stok"].HeaderText = "Stok";
         }
+        public static DataTable GetProducts(string keyword)
+        {
+            using (SqlConnection conn = Connection.GetConnection())
+            {
+                conn.Open();
+
+                string query =
+                    "SELECT id_produk, nama_produk, harga, stok, deskripsi, gambar_produk, tanggal FROM produk WHERE id_user=@id";
+
+                if (!string.IsNullOrEmpty(keyword))
+                    query += " AND nama_produk LIKE @keyword";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id", Form1.userId);
+
+                if (!string.IsNullOrEmpty(keyword))
+                    cmd.Parameters.AddWithValue("@keyword", "%" + keyword + "%");
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                return dt;
+            }
+        }
 
         private void dataGridViewProduk_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -138,6 +167,22 @@ namespace ukkFauzanRizaldy
         private void dtProduk_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnKelola_Click(object sender, EventArgs e)
+        {
+            Produk p = new Produk(Form1.userId);
+            p.Show();
+        }
+
+        private void dataGridViewProduk_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            LoadProducts(textBox1.Text.Trim());
         }
     }
 }

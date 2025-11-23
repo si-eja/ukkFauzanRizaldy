@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataGridViewProduk = new System.Windows.Forms.DataGridView();
-            this.tbCari = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnLogout = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
@@ -51,6 +50,7 @@
             this.labelNama = new System.Windows.Forms.Label();
             this.labelKontak = new System.Windows.Forms.Label();
             this.dtProduk = new System.Windows.Forms.DateTimePicker();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProduk)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbGambar)).BeginInit();
@@ -64,17 +64,7 @@
             this.dataGridViewProduk.Size = new System.Drawing.Size(728, 315);
             this.dataGridViewProduk.TabIndex = 0;
             this.dataGridViewProduk.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProduk_CellClick);
-            // 
-            // tbCari
-            // 
-            this.tbCari.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbCari.Location = new System.Drawing.Point(12, 121);
-            this.tbCari.Multiline = true;
-            this.tbCari.Name = "tbCari";
-            this.tbCari.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbCari.Size = new System.Drawing.Size(618, 27);
-            this.tbCari.TabIndex = 1;
-            this.tbCari.TextChanged += new System.EventHandler(this.Form1_Load);
+            this.dataGridViewProduk.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProduk_CellContentClick);
             // 
             // label1
             // 
@@ -105,7 +95,7 @@
             this.btnLogin.BackColor = System.Drawing.Color.LimeGreen;
             this.btnLogin.Font = new System.Drawing.Font("Modern No. 20", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(724, -1);
+            this.btnLogin.Location = new System.Drawing.Point(824, -1);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(94, 41);
             this.btnLogin.TabIndex = 4;
@@ -122,6 +112,7 @@
             this.btnKelola.TabIndex = 5;
             this.btnKelola.Text = "Kelola produk";
             this.btnKelola.UseVisualStyleBackColor = false;
+            this.btnKelola.Click += new System.EventHandler(this.btnKelola_Click);
             // 
             // pictureBox1
             // 
@@ -147,6 +138,7 @@
             // 
             this.tbNamaProduk.Location = new System.Drawing.Point(755, 230);
             this.tbNamaProduk.Name = "tbNamaProduk";
+            this.tbNamaProduk.ReadOnly = true;
             this.tbNamaProduk.Size = new System.Drawing.Size(150, 20);
             this.tbNamaProduk.TabIndex = 8;
             // 
@@ -154,6 +146,7 @@
             // 
             this.tbHarga.Location = new System.Drawing.Point(755, 269);
             this.tbHarga.Name = "tbHarga";
+            this.tbHarga.ReadOnly = true;
             this.tbHarga.Size = new System.Drawing.Size(150, 20);
             this.tbHarga.TabIndex = 9;
             // 
@@ -161,6 +154,7 @@
             // 
             this.tbStok.Location = new System.Drawing.Point(755, 308);
             this.tbStok.Name = "tbStok";
+            this.tbStok.ReadOnly = true;
             this.tbStok.Size = new System.Drawing.Size(150, 20);
             this.tbStok.TabIndex = 10;
             // 
@@ -169,6 +163,7 @@
             this.tbDeskripsi.Location = new System.Drawing.Point(755, 347);
             this.tbDeskripsi.Multiline = true;
             this.tbDeskripsi.Name = "tbDeskripsi";
+            this.tbDeskripsi.ReadOnly = true;
             this.tbDeskripsi.Size = new System.Drawing.Size(150, 83);
             this.tbDeskripsi.TabIndex = 11;
             // 
@@ -270,11 +265,20 @@
             this.dtProduk.TabIndex = 22;
             this.dtProduk.ValueChanged += new System.EventHandler(this.dtProduk_ValueChanged);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(12, 128);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(618, 20);
+            this.textBox1.TabIndex = 23;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(918, 481);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.dtProduk);
             this.Controls.Add(this.labelKontak);
             this.Controls.Add(this.labelNama);
@@ -295,7 +299,6 @@
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.tbCari);
             this.Controls.Add(this.dataGridViewProduk);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -312,7 +315,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridViewProduk;
-        private System.Windows.Forms.TextBox tbCari;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Button btnLogin;
@@ -333,6 +335,7 @@
         private System.Windows.Forms.Label labelNama;
         private System.Windows.Forms.Label labelKontak;
         private System.Windows.Forms.DateTimePicker dtProduk;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

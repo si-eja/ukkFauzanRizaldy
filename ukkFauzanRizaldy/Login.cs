@@ -40,7 +40,7 @@ namespace ukkFauzanRizaldy
                 {
                     conn.Open();
 
-                    string query = "SELECT nama, kontak FROM dbo.users WHERE username=@user AND password=@pass";
+                    string query = "SELECT id_user, nama, kontak FROM dbo.users WHERE username=@user AND password=@pass";
 
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@user", username);
@@ -50,6 +50,7 @@ namespace ukkFauzanRizaldy
 
                     if (reader.Read())
                     {
+                        Form1.userId = Convert.ToInt32(reader["id_user"]);
                         Form1.namaUser = reader["nama"].ToString();
                         Form1.kontakUser = reader["kontak"].ToString();
                         Form1.isLoggedIn = true;
